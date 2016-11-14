@@ -8,11 +8,13 @@
 #define ADD "add"
 #define SET "set"
 */
+#define STEP_DELEAY wolrd.tick_lag
 
 /obj/item/projectile
 	name = "projectile"
 	icon = 'icons/obj/projectiles.dmi'
 	icon_state = "bullet"
+	animate_movement = NO_STEPS
 	density = 1
 	unacidable = 1
 	anchored = 1 //There's a reason this is here, Mport. God fucking damn it -Agouri. Find&Fix by Pete. The reason this is here is to stop the curving of emitter shots.
@@ -265,13 +267,14 @@
 	return 1
 
 /obj/item/projectile/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
-	if(air_group || (height==0)) return 1
+	return 1
+/*	if(air_group || (height==0)) return 1
 
 	if(istype(mover, /obj/item/projectile))
 		return prob(95) //ha
 	else
 		return 1
-
+*/
 /obj/item/projectile/process()
 	var/first_step = 1
 
@@ -310,8 +313,10 @@
 			first_step = 0
 		else if(!bumped)
 			tracer_effect(effect_transform)
-
 		if(!hitscan)
+			pixel_x = (-trajectory.offset_x+location.pixel_x)
+			pixel_y = (-trajectory.offset_y+location.pixel_y)
+			animate(src, pixel_x = location.pixel_x, pixel_y = location.pixel_y, time = step_delay, flags = ANIMATION_END_NOW)
 			sleep(step_delay)	//add delay between movement iterations if it's not a hitscan weapon
 
 /obj/item/projectile/proc/before_move()
@@ -326,14 +331,14 @@
 
 	// plot the initial trajectory
 	trajectory = new()
-	trajectory.setup(starting, original, pixel_x, pixel_y, angle_offset=offset)
+	trajectory.setup(starting, original, pixel_x, pixel_y, p_x, p_y, angle_offset=offset)
 
 	// generate this now since all visual effects the projectile makes can use it
 	effect_transform = new()
 	effect_transform.Scale(trajectory.return_hypotenuse(), 1)
 	effect_transform.Turn(-trajectory.return_angle())		//no idea why this has to be inverted, but it works
 
-	transform = turn(transform, -(trajectory.return_angle() + 90)) //no idea why 90 needs to be added, but it works
+	transform = turn(transform, -trajectory.return_angle()) //no idea why 90 needs to be added, but it works
 
 /obj/item/projectile/proc/muzzle_effect(var/matrix/T)
 	if(silenced)
@@ -435,3 +440,5 @@
 	var/output = trace.process() //Test it!
 	qdel(trace) //No need for it anymore
 	return output //Send it back to the gun!
+
+#undef STEP_DELEAY
