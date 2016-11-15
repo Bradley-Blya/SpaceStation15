@@ -71,6 +71,17 @@
 	magazine_type = /obj/item/ammo_magazine/a50
 	auto_eject = 1
 
+	update_icon()
+		..()
+		if(ammo_magazine)
+			if(!length(ammo_magazine.stored_ammo))
+				icon_state = "[initial(icon_state)]-empty"
+			else
+				icon_state = initial(icon_state)
+		else
+			icon_state = "[initial(icon_state)]-empty"
+
+
 /obj/item/weapon/gun/projectile/deagle/gold
 	desc = "A gold plated gun folded over a million times by superior martian gunsmiths. Uses .50 AE ammo."
 	icon_state = "deagleg"
@@ -173,7 +184,7 @@
 	handle_casings = CYCLE_CASINGS //player has to take the old casing out manually before reloading
 	load_method = SINGLE_CASING
 	max_shells = 1 //literally just a barrel
-	
+
 	var/global/list/ammo_types = list(
 		/obj/item/ammo_casing/a357              = ".357",
 		/obj/item/ammo_casing/c9mmf             = "9mm",
@@ -194,7 +205,7 @@
 /obj/item/weapon/gun/projectile/pirate/New()
 	ammo_type = pick(ammo_types)
 	desc += " Uses [ammo_types[ammo_type]] rounds."
-	
+
 	var/obj/item/ammo_casing/ammo = ammo_type
 	caliber = initial(ammo.caliber)
 	..()
