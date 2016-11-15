@@ -18,6 +18,7 @@
 		BB = new projectile_type(src)
 	pixel_x = rand(-10, 10)
 	pixel_y = rand(-10, 10)
+	transform = turn(transform, rand(0, 360))
 
 //removes the projectile from the ammo casing
 /obj/item/ammo_casing/proc/expend()
