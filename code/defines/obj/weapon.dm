@@ -34,6 +34,7 @@
 	throwforce = 0
 	throw_speed = 4
 	throw_range = 20
+	var/can_clean_jump = 0
 
 /obj/item/weapon/soap/nanotrasen
 	desc = "A Nanotrasen brand bar of soap. Smells of phoron."
@@ -48,6 +49,7 @@
 /obj/item/weapon/soap/syndie
 	desc = "An untrustworthy bar of soap. Smells of fear."
 	icon_state = "soapsyndie"
+	can_clean_jump = 1
 
 /obj/item/weapon/bikehorn
 	name = "bike horn"

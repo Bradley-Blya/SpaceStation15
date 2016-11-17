@@ -382,3 +382,17 @@
 	id = "glue"
 	description = "An extremely powerful bonding agent."
 	color = "#FFFFCC"
+
+/datum/reagent/washing_powder
+	name = "Washing Powder"
+	id = "washpowder"
+	description = "Space detergent. It smells clean"
+	reagent_state = SOLID
+	color = "#FFFFFF"
+
+/datum/reagent/bleach
+	name = "Bleach"
+	id = "bleach"
+	description = "Bleach. It smells chlorine"
+	reagent_state = LIQUID
+	color = "#FFFFFF"

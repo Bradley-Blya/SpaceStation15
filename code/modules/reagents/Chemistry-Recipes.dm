@@ -1919,6 +1919,20 @@
 	required_reagents = list("space_up" = 2, "bluecuracao" = 1, "melonliquor" = 1)
 	result_amount = 4
 
+/datum/chemical_reaction/washing_powder
+	name = "Washing Powder"
+	id = "washpowder"
+	result = "washpowder"
+	required_reagents = list("foaming_agent" = 2, "oxygen" = 1)
+	result_amount = 5
+
+/datum/chemical_reaction/bleach
+	name = "Bleach"
+	id = "bleach"
+	result = "bleach"
+	required_reagents = list("chlorine" = 1, "ethanol" = 1)
+	result_amount = 3
+
 /* Removed xenoarcheology stuff
 datum
 	chemical_reaction

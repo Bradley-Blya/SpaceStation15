@@ -21,6 +21,11 @@
 	//1 = hacked
 	var/gibs_ready = 0
 	var/obj/crayon
+	var/list/cleaners = list("sterilizine","holywater","cleaner","washpowder","bleach")
+
+/obj/machinery/washing_machine/New()
+	..()
+	reagents = new/datum/reagents(30)
 
 /obj/machinery/washing_machine/verb/start()
 	set name = "Start Washing"
@@ -40,8 +45,33 @@
 		state = 5
 	update_icon()
 	sleep(200)
+
+	var/can_clean = FALSE
+
+	if(reagents && reagents.reagent_list.len)
+		var/clean_power = 0
+		for(var/datum/reagent/R in reagents.reagent_list)
+			if(cleaners.Find(R.id))
+				clean_power += reagents.get_reagent_amount(R.id)
+		if(clean_power >= 10)
+			can_clean = TRUE
+		reagents.remove_any(10)
+
+
+
 	for(var/atom/A in contents)
-		A.clean_blood()
+		if(locate(/obj/item/weapon/soap) in contents)
+			can_clean = 0
+		if(istype(A,/obj/item/clothing/under))
+			if(can_clean)
+				A.clean_blood()
+		else
+			A.clean_blood()
+
+	can_clean = FALSE
+
+
+
 
 	for(var/obj/item/I in contents)
 		I.decontaminate()
@@ -86,6 +116,26 @@
 				..()
 		else
 			..()
+	else if(istype(W,/obj/item/weapon/soap))
+		if( state in list(	1, 3, 6 ) )
+			user.drop_item()
+			W.loc = src
+		else
+			..()
+	else if(istype(W,/obj/item/weapon/reagent_containers/glass))
+		var/obj/item/weapon/reagent_containers/glass/G = W
+		if(!G.is_open_container())
+			return ..()
+		if(!W.reagents || !W.reagents.total_volume)
+			user << "<span class='notice'>[W] is empty.</span>"
+			return 1
+		if(reagents && !reagents.get_free_space())
+			user << "<span class='notice'>[src] is full.</span>"
+			return 1
+		var/trans = W.reagents.trans_to_obj(src, W:amount_per_transfer_from_this)
+		user << "<span class='notice'>You fill [src] with [trans] units of the contents of [W].</span>"
+		return 1
+
 	else if(istype(W,/obj/item/weapon/grab))
 		if( (state == 1) && hacked)
 			var/obj/item/weapon/grab/G = W
@@ -142,7 +192,7 @@
 			user << "This item does not fit."
 			return
 
-		if(contents.len < 5)
+		if(contents.len < 7)
 			if ( state in list(1, 3) )
 				user.drop_item()
 				W.loc = src
@@ -188,3 +238,9 @@
 
 
 	update_icon()
+
+/obj/machinery/washing_machine/examine(mob/user, var/distance = -1, var/infix = "", var/suffix = "")
+	..(user,distance,infix,suffix)
+	if(reagents && (distance <= -1))
+		user << "Is contains [reagents.total_volume] units of something."
+

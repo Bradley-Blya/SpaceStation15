@@ -217,7 +217,7 @@
 	w_class = 3.0
 	amount_per_transfer_from_this = 20
 	possible_transfer_amounts = list(10,20,30,60,120)
-	volume = 120
+	volume = 150
 	flags = OPENCONTAINER
 
 	attackby(var/obj/D, mob/user as mob)
@@ -234,6 +234,60 @@
 		if (!is_open_container())
 			var/image/lid = image(icon, src, "lid_[initial(icon_state)]")
 			overlays += lid
+
+/obj/item/weapon/reagent_containers/glass/pcanister
+	desc = "It's a plastic canister."
+	name = "plastic canister"
+	icon = 'icons/obj/janitor.dmi'
+	icon_state = "pcanister"
+	item_state = "pcanister"
+	w_class = 3.0
+	amount_per_transfer_from_this = 20
+	possible_transfer_amounts = list(10,20,30,60,120)
+	volume = 150
+	flags = 0
+
+	New()
+		..()
+		update_icon()
+
+	update_icon()
+		overlays.Cut()
+
+		if (!is_open_container())
+			var/image/lid = image(icon, src, "lid_[initial(icon_state)]")
+			overlays += lid
+
+/obj/item/weapon/reagent_containers/glass/pcanister/bleach
+	name = "plastic canister (bleach)"
+	New()
+		..()
+		reagents.add_reagent("bleach", 150)
+		update_icon()
+
+/obj/item/weapon/reagent_containers/glass/box
+	desc = "It's a box."
+	name = "Box"
+	icon = 'icons/obj/janitor.dmi'
+	icon_state = "tide"
+	item_state = null
+	w_class = 1.0
+	amount_per_transfer_from_this = 10
+	possible_transfer_amounts = list(5,10,15,30)
+	volume = 50
+	flags = OPENCONTAINER
+
+	New()
+		..()
+		icon_state = pick("tide","surf","ariel")
+
+/obj/item/weapon/reagent_containers/glass/box/washpowder
+	desc = "It's a box with a washing powder."
+	New()
+		..()
+		reagents.add_reagent("washpowder", 50)
+		name = "Box ([icon_state])"
+
 
 /*
 /obj/item/weapon/reagent_containers/glass/blender_jug

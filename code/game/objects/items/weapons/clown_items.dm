@@ -33,6 +33,9 @@
 		user << "<span class='notice'>You scrub \the [target.name] clean.</span>"
 		var/turf/T = target
 		T.clean()
+	else if(istype(target,/obj/item/clothing/under) && !can_clean_jump)
+		user << "<span class='notice'>You not can clean \the [target.name].</span>"
+		return
 	else
 		user << "<span class='notice'>You clean \the [target.name].</span>"
 		target.clean_blood()

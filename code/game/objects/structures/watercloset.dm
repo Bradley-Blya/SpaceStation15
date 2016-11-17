@@ -260,9 +260,9 @@
 			if(H.wear_suit)
 				if(H.wear_suit.clean_blood())
 					H.update_inv_wear_suit(0)
-			else if(H.w_uniform)
+			/*else if(H.w_uniform) //Only in washing machine
 				if(H.w_uniform.clean_blood())
-					H.update_inv_w_uniform(0)
+					H.update_inv_w_uniform(0)*/
 			if(H.gloves && washgloves)
 				if(H.gloves.clean_blood())
 					H.update_inv_gloves(0)
@@ -378,7 +378,6 @@
 	busy = 0
 
 	if(!Adjacent(user)) return		//Person has moved away from the sink
-
 	user.clean_blood()
 	if(ishuman(user))
 		user:update_inv_gloves()
@@ -389,6 +388,9 @@
 /obj/structure/sink/attackby(obj/item/O as obj, mob/user as mob)
 	if(busy)
 		user << "\red Someone's already washing here."
+		return
+	if(istype(O,/obj/item/clothing/under))
+		user << "\red You can't clean here."
 		return
 
 	var/obj/item/weapon/reagent_containers/RG = O

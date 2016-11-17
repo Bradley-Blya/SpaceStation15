@@ -212,6 +212,19 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	containername = "Janitorial supplies"
 	group = "Supply"
 
+/datum/supply_packs/cleaners
+	name = "Cleaners"
+	contains = list(/obj/item/weapon/reagent_containers/glass/box/washpowder,
+					/obj/item/weapon/reagent_containers/glass/box/washpowder,
+					/obj/item/weapon/reagent_containers/glass/box/washpowder,
+					/obj/item/weapon/reagent_containers/glass/box/washpowder,
+					/obj/item/weapon/reagent_containers/spray/cleaner,
+					/obj/item/weapon/reagent_containers/glass/pcanister/bleach)
+	cost = 10
+	containertype = /obj/structure/closet/crate
+	containername = "Cleaners"
+	group = "Supply"
+
 /datum/supply_packs/lightbulbs
 	name = "Replacement lights"
 	contains = list(/obj/item/weapon/storage/box/lights/mixed,
