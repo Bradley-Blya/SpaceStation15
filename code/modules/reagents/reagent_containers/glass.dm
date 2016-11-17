@@ -217,7 +217,7 @@
 	w_class = 3.0
 	amount_per_transfer_from_this = 20
 	possible_transfer_amounts = list(10,20,30,60,120)
-	volume = 150
+	volume = 120
 	flags = OPENCONTAINER
 
 	attackby(var/obj/D, mob/user as mob)
