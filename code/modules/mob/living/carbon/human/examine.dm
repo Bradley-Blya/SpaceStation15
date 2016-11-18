@@ -65,9 +65,15 @@
 				t_is = "is"
 				t_does = "does"
 
+
 	msg += "<EM>[src.name]</EM>"
 	if(species.name != "Human")
 		msg += ", a <b><font color='[species.flesh_color]'>[species.name]</font></b>"
+	if(wear_id)
+		var/id_assign = get_assignment(null,null)
+		if(id_assign)
+			msg += ", [id_assign]"
+
 	msg += "!\n"
 
 	//uniform
@@ -185,7 +191,7 @@
 	//right ear
 	if(r_ear && !skipears)
 		msg += "[t_He] [t_has] \icon[r_ear] \a [r_ear] on [t_his] right ear.\n"
-
+/*
 	//ID
 	if(wear_id)
 		/*var/id
@@ -199,7 +205,7 @@
 			msg += "<span class='warning'>[t_He] [t_is] wearing \icon[wear_id] \a [wear_id] yet something doesn't seem right...</span>\n"
 		else*/
 		msg += "[t_He] [t_is] wearing \icon[wear_id] \a [wear_id].\n"
-
+*/
 	//Jitters
 	if(is_jittery)
 		if(jitteriness >= 300)

@@ -163,6 +163,7 @@
 /obj/item/weapon/card/id/GetID()
 	return src
 
+
 /obj/item/weapon/card/id/verb/read()
 	set name = "Read ID Card"
 	set category = "Object"
