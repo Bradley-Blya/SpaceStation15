@@ -14,9 +14,6 @@
 	mymob.blind.layer = 18
 	mymob.blind.invisibility = 101
 
-/datum/hud/proc/ai_hud()
-	return
-
 /datum/hud/proc/blob_hud(ui_style = 'icons/mob/screen1_Midnight.dmi')
 
 	blobpwrdisplay = new /obj/screen()

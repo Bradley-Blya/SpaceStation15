@@ -13,6 +13,8 @@
 	if(client.buildmode) // comes after object.Click to allow buildmode gui objects to be clicked
 		build_click(src, client.buildmode, params, A)
 		return
+	if(istype(A,/obj/screen))
+		return
 
 	if(control_disabled || stat) return
 	next_move = world.time + 9
