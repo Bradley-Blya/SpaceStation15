@@ -174,6 +174,7 @@ var/list/admin_verbs_debug = list(
 	/client/proc/show_plant_genes,
 	/client/proc/enable_debug_verbs,
 	/client/proc/callproc,
+	/client/proc/callproc_target,
 	/client/proc/toggledebuglogs,
 	/client/proc/SDQL_query,
 	/client/proc/SDQL2_query,

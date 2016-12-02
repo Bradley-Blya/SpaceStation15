@@ -24,7 +24,7 @@ Because if you select a player mob as owner it tries to do the proc for
 /mob/living/carbon/human/ instead. And that gives a run-time error.
 But you can call procs that are of type /mob/living/carbon/human/proc/ for that player.
 */
-
+/*
 /client/proc/callproc()
 	set category = "Debug"
 	set name = "Advanced ProcCall"
@@ -64,7 +64,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 
 		var/procname = input("Proc path, eg: /proc/fake_blood","Path:", null) as text|null
 		if(!procname)	return
-	
+
 		if(targetselected)
 			if(!target)
 				usr << "<span class='danger'>Your target no longer exists.</span>"
@@ -148,6 +148,16 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 		usr << "<font color='blue'>[procname] returned: [returnval ? returnval : "null"]</font>"
 		feedback_add_details("admin_verb","APC") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
+/client/proc/callproc_target(atom/A in range(world.view))
+	set category = null
+	set name = "Advanced ProcCall Target"
+
+	if(!check_rights(R_DEBUG)) return
+	if(config.debugparanoid && !check_rights(R_ADMIN)) return
+
+	callproc_targetpicked(1, A)
+
+*/
 /client/proc/Cell()
 	set category = "Debug"
 	set name = "Cell"
