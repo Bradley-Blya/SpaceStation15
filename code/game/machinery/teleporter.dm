@@ -202,6 +202,9 @@
 			do_teleport(M, locate(rand((2*TRANSITIONEDGE), world.maxx - (2*TRANSITIONEDGE)), rand((2*TRANSITIONEDGE), world.maxy - (2*TRANSITIONEDGE)), 3), 2)
 		else
 			do_teleport(M, com.locked) //dead-on precision
+		set_light(5, 3, "#0000FF")
+		spawn(10)
+			set_light(0)
 
 		if(com.one_time_use) //Make one-time-use cards only usable one time!
 			com.one_time_use = 0

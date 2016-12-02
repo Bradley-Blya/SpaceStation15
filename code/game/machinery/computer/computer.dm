@@ -10,7 +10,7 @@
 	var/processing = 0
 
 	var/light_range_on = 3
-	var/light_power_on = 1
+	var/light_power_on = 3
 
 /obj/machinery/computer/initialize()
 	power_change()
