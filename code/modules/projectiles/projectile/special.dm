@@ -6,6 +6,9 @@
 	nodamage = 1
 	check_armour = "energy"
 
+	light_range = 3
+	light_color = "5050FF"
+
 
 	on_hit(var/atom/target, var/blocked = 0)
 		empulse(target, 1, 1)
@@ -32,6 +35,9 @@
 	nodamage = 1
 	check_armour = "energy"
 	var/temperature = 300
+
+	light_range = 3
+	light_color = "5050FF"
 
 
 	on_hit(var/atom/target, var/blocked = 0)//These two could likely check temp protection on the mob
@@ -77,6 +83,9 @@
 	damage_type = TOX
 	nodamage = 1
 	check_armour = "energy"
+
+	light_range = 3
+	light_color = "00FF00"
 
 	on_hit(var/atom/target, var/blocked = 0)
 		var/mob/living/M = target

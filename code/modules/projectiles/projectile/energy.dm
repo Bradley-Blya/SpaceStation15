@@ -5,7 +5,6 @@
 	damage_type = BURN
 	check_armour = "energy"
 
-
 //releases a burst of light on impact or after travelling a distance
 /obj/item/projectile/energy/flash
 	name = "chemical shell"
@@ -28,7 +27,7 @@
 	//snap pop
 	playsound(src, 'sound/effects/snap.ogg', 50, 1)
 	src.visible_message("<span class='warning'>\The [src] explodes in a bright flash!</span>")
-	
+
 	new /obj/effect/decal/cleanable/ash(src.loc) //always use src.loc so that ash doesn't end up inside windows
 	new /obj/effect/effect/sparks(T)
 	new /obj/effect/effect/smoke/illumination(T, brightness=max(flash_range*2, brightness), lifetime=light_duration)
@@ -45,8 +44,17 @@
 	icon_state = "spark"
 	nodamage = 1
 	taser_effect = 1
+
+	stun = 10
+	weaken = 10
+	stutter = 10
+
 	agony = 40
 	damage_type = HALLOSS
+
+	light_range = 3
+	light_color = "#FFFF78"
+
 	//Damage will be handled on the MOB side, to prevent window shattering.
 
 /obj/item/projectile/energy/electrode/stunshot
@@ -62,6 +70,9 @@
 	damage_type = CLONE
 	irradiate = 40
 
+	light_range = 3
+	light_color = "#00FF00"
+
 
 /obj/item/projectile/energy/dart
 	name = "dart"
@@ -70,6 +81,8 @@
 	damage_type = TOX
 	weaken = 5
 
+	light_range = 3
+	light_color = "#00FF00"
 
 /obj/item/projectile/energy/bolt
 	name = "bolt"
@@ -78,6 +91,7 @@
 	damage_type = TOX
 	nodamage = 0
 	agony = 40
+	weaken = 5
 	stutter = 10
 
 
@@ -99,3 +113,6 @@
 	damage = 20
 	damage_type = TOX
 	irradiate = 20
+
+	light_range = 3
+	light_color = "#00FF00"

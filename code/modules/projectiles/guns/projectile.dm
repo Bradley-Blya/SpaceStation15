@@ -11,6 +11,10 @@
 	matter = list(DEFAULT_WALL_MATERIAL = 1000)
 	recoil = 1
 
+	light_power = 1
+	light_range = 0
+	light_color
+
 	var/caliber = "357"		//determines which casings will fit
 	var/handle_casings = EJECT_CASINGS	//determines how spent casings should be handled
 	var/load_method = SINGLE_CASING|SPEEDLOADER //1 = Single shells, 2 = box or quick loader, 3 = magazine
@@ -38,7 +42,10 @@
 			loaded += new ammo_type(src)
 	if(ispath(magazine_type) && (load_method & MAGAZINE))
 		ammo_magazine = new magazine_type(src)
+	if(light_range)
+		set_light(light_range, light_power, light_color)
 	update_icon()
+
 
 /obj/item/weapon/gun/projectile/consume_next_projectile()
 	//get the next casing

@@ -5,6 +5,9 @@
 	damage = 20
 	check_armour = "energy"
 
+	light_range = 3
+	light_color = "5050FF"
+
 /obj/item/projectile/forcebolt/strong
 	name = "force bolt"
 

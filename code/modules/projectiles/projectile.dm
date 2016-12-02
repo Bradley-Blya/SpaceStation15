@@ -8,7 +8,6 @@
 #define ADD "add"
 #define SET "set"
 */
-#define STEP_DELEAY wolrd.tick_lag
 
 /obj/item/projectile
 	name = "projectile"
@@ -440,5 +439,3 @@
 	var/output = trace.process() //Test it!
 	qdel(trace) //No need for it anymore
 	return output //Send it back to the gun!
-
-#undef STEP_DELEAY

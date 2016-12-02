@@ -3,9 +3,15 @@
 	var/active_force
 	var/active_throwforce
 	var/active_w_class
+	var/active_light = 0
+	var/active_light_range = 2
+	var/active_light_power = 1
+	var/active_light_color = "#FFFFFF"
 	sharp = 0
 	edge = 0
 	flags = NOBLOODY
+
+
 
 /obj/item/weapon/melee/energy/proc/activate(mob/living/user)
 	anchored = 1
@@ -18,6 +24,9 @@
 	edge = 1
 	w_class = active_w_class
 	playsound(user, 'sound/weapons/saberon.ogg', 50, 1)
+	if(active_light)
+		set_light(active_light_range, active_light_power, active_light_color)
+
 
 /obj/item/weapon/melee/energy/proc/deactivate(mob/living/user)
 	anchored = 0
@@ -30,6 +39,8 @@
 	sharp = initial(sharp)
 	edge = initial(edge)
 	w_class = initial(w_class)
+	if(active_light)
+		set_light(0)
 
 /obj/item/weapon/melee/energy/attack_self(mob/living/user as mob)
 	if (active)
@@ -80,6 +91,9 @@
 	sharp = 1
 	edge = 1
 
+	active_light = 1
+	active_light_color = "#0000FF"
+
 /obj/item/weapon/melee/energy/axe/activate(mob/living/user)
 	..()
 	icon_state = "axe1"
@@ -116,6 +130,9 @@
 	edge = 1
 	var/blade_color
 
+	active_light = 1
+	active_light_color = "#FF0000"
+
 /obj/item/weapon/melee/energy/sword/dropped(var/mob/user)
 	..()
 	if(!istype(loc,/mob))
@@ -123,17 +140,31 @@
 
 /obj/item/weapon/melee/energy/sword/New()
 	blade_color = pick("red","blue","green","purple")
+	switch(blade_color)
+		if("red")
+			active_light_color = "#FF0000"
+		if("blue")
+			active_light_color = "#0000FF"
+		if("green")
+			active_light_color = "#00FF00"
+		if("purple")
+			active_light_color = "#FF00FF"
+
 
 /obj/item/weapon/melee/energy/sword/green/New()
+	active_light_color = "#00FF00"
 	blade_color = "green"
 
 /obj/item/weapon/melee/energy/sword/red/New()
+	active_light_color = "#FF0000"
 	blade_color = "red"
 
 /obj/item/weapon/melee/energy/sword/blue/New()
+	active_light_color = "#0000FF"
 	blade_color = "blue"
 
 /obj/item/weapon/melee/energy/sword/purple/New()
+	active_light_color = "#FF00FF"
 	blade_color = "purple"
 
 /obj/item/weapon/melee/energy/sword/activate(mob/living/user)
@@ -159,6 +190,10 @@
 	name = "energy cutlass"
 	desc = "Arrrr matey."
 	icon_state = "cutlass0"
+
+/obj/item/weapon/melee/energy/sword/pirate/New()
+	..()
+	active_light_color = "#FF0000"
 
 /obj/item/weapon/melee/energy/sword/pirate/activate(mob/living/user)
 	..()

@@ -25,7 +25,7 @@
 	item_state = "stunrevolver"
 	fire_sound = 'sound/weapons/Gunshot.ogg'
 	origin_tech = "combat=3;materials=3;powerstorage=2"
-	projectile_type = /obj/item/projectile/energy/electrode
+	projectile_type = /obj/item/projectile/beam/stun
 	max_shots = 8
 
 

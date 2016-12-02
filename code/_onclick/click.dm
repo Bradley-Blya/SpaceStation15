@@ -4,7 +4,7 @@
 */
 
 // 1 decisecond click delay (above and beyond mob/next_move)
-/mob/var/next_click	= 0
+/mob/var/next_click = 0
 
 /*
 	Before anything else, defer these calls to a per-mobtype handler.  This allows us to
@@ -36,9 +36,9 @@
 	* mob/RangedAttack(atom,params) - used only ranged, only used for tk and laser eyes but could be changed
 */
 /mob/proc/ClickOn( var/atom/A, var/params )
-	if(world.time <= next_click)
+	/*if(world.time <= next_click)
 		return
-	next_click = world.time + 1
+	next_click = world.time + world.tick_lag*/
 
 	if(client.buildmode)
 		build_click(src, client.buildmode, params, A)
