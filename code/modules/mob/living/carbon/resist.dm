@@ -20,7 +20,7 @@
 		return
 
 	..()
-	
+
 	if(handcuffed)
 		spawn() escape_handcuffs()
 	else if(legcuffed)
@@ -43,7 +43,7 @@
 	var/displaytime = 2 //Minutes to display in the "this will take X minutes."
 	//If you are handcuffed with actual handcuffs... Well what do I know, maybe someone will want to handcuff you with toilet paper in the future...
 	if(istype(HC))
-		breakouttime = HC.breakouttime
+		breakouttime = HC.breakouttime * HC.getLockpickBoost(src)
 		displaytime = breakouttime / 600 //Minutes
 
 	visible_message(

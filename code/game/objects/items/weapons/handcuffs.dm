@@ -17,6 +17,10 @@
 	var/cuff_sound = 'sound/weapons/handcuffs.ogg'
 	var/cuff_type = "handcuffs"
 
+	var/list/lockpicks = list(/obj/item/weapon/material/kitchen/utensil/fork = 0.5,
+	                          /obj/item/weapon/screwdriver = 0.5,
+	                          /obj/item/weapon/pen = 0.7)
+
 /obj/item/weapon/handcuffs/attack(var/mob/living/carbon/C, var/mob/living/user)
 
 	if(!user.IsAdvancedToolUser())
@@ -85,6 +89,25 @@
 	target.update_inv_handcuffed()
 	return
 
+/obj/item/weapon/handcuffs/proc/getLockpickBoost(var/mob/user)
+	. = 1
+
+	for(var/slotName in list(slot_l_store, slot_r_store, slot_l_ear, slot_r_ear))
+		var/obj/item/I = user.get_equipped_item(slotName)
+		if(I)
+			for(var/P in lockpicks)
+				if(istype(I,P))
+					var/num = lockpicks[P]
+					if(. > num)
+						. = num
+	for(var/obj/item/I in view(1,user))
+		for(var/P in lockpicks)
+			if(istype(I,P))
+				var/num = lockpicks[P]
+				if(. > num)
+					. = num
+	return .
+
 var/last_chew = 0
 /mob/living/carbon/human/RestrainedClickOn(var/atom/A)
 	if (A != src) return ..()
@@ -117,6 +140,9 @@ var/last_chew = 0
 	breakouttime = 300 //Deciseconds = 30s
 	cuff_sound = 'sound/weapons/cablecuff.ogg'
 	cuff_type = "cable restraints"
+
+	lockpicks = list(/obj/item/weapon/material/knife = 0.5,
+	                 /obj/item/weapon/wirecutters = 0.3)
 
 /obj/item/weapon/handcuffs/cable/red
 	color = "#DD0000"
