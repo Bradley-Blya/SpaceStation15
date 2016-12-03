@@ -35,7 +35,7 @@
 	else
 		return null
 
-//return flags that should be added to the viewer's sight var. 
+//return flags that should be added to the viewer's sight var.
 //Otherwise return a negative number to indicate that the view should be cancelled.
 /atom/proc/check_eye(user as mob)
 	if (istype(user, /mob/living/silicon/ai)) // WHYYYY
@@ -411,7 +411,7 @@ its easier to just keep the beam vertical.
 /atom/proc/clean_blood()
 	if(!simulated)
 		return
-	src.color = initial(src.color) //paint
+	//src.color = initial(src.color) //NOPE
 	src.germ_level = 0
 	if(istype(blood_DNA, /list))
 		del(blood_DNA)
