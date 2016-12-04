@@ -240,3 +240,8 @@
 	new /obj/item/clothing/mask/gas/sexymime(src.loc)
 	new /obj/item/clothing/under/sexymime(src.loc)
 	qdel(src)
+
+/obj/effect/landmark/illusiongrenade/New()
+	if(prob(30))
+		new /obj/item/weapon/grenade/illusion(src.loc)
+	qdel(src)

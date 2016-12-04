@@ -5013,7 +5013,7 @@
 "bSu" = (/obj/structure/grille/broken,/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"; pixel_x = 0},/turf/simulated/floor/plating,/area/maintenance/engineering)
 "bSv" = (/obj/structure/grille,/obj/structure/window/reinforced,/obj/structure/window/reinforced{dir = 4},/obj/structure/cable{d1 = 2; d2 = 8; icon_state = "2-8"},/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/machinery/atmospherics/pipe/simple/hidden/supply,/turf/simulated/floor/plating,/area/maintenance/engineering)
 "bSw" = (/obj/machinery/space_heater,/turf/simulated/floor/plating,/area/maintenance/engineering)
-"bSx" = (/obj/structure/table/standard,/obj/item/device/t_scanner,/turf/simulated/floor/plating,/area/maintenance/engineering)
+"bSx" = (/obj/structure/table/standard,/obj/item/device/t_scanner,/obj/effect/landmark/illusiongrenade,/turf/simulated/floor/plating,/area/maintenance/engineering)
 "bSy" = (/obj/machinery/sleeper,/turf/simulated/floor{dir = 8; icon_state = "whitered"},/area/medical/sleeper)
 "bSz" = (/obj/machinery/atmospherics/unary/vent_pump/on,/turf/simulated/floor{icon_state = "white"},/area/medical/sleeper)
 "bSA" = (/obj/machinery/button/remote/blast_door{id = "scanhide"; name = "Diagnostics Room Separation Shutters"; pixel_x = -6; pixel_y = -25; req_access = list(5)},/obj/machinery/button/remote/blast_door{id = "acute2"; name = "Acute Treatment Privacy Shutters"; pixel_x = 6; pixel_y = -25; req_access = list(5)},/turf/simulated/floor{icon_state = "white"},/area/medical/sleeper)

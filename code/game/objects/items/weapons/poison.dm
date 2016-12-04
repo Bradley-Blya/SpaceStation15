@@ -20,6 +20,8 @@
 
 /obj/item/weapon/afterattack(obj/target, mob/user, proximity)
 	. = ..()
+	if(!poisonOverlayState)
+		return
 	if(!reagents)
 		return
 	if(reagents.total_volume)
@@ -43,19 +45,21 @@
 
 
 /obj/item/weapon/clean_blood()
-	if(reagents)
-		reagents.clear_reagents()
-		update_icon()
+	if(poisonOverlayState)
+		if(reagents)
+			reagents.clear_reagents()
+			update_icon()
 	. = ..()
 
 /obj/item/weapon/update_icon()
 	. = ..()
-	if(poisonOverlay)
-		overlays -= poisonOverlay
-	if(reagents)
-		if(reagents.total_volume)
-			poisonOverlay = image(POISON_OVERLAY_ICON, icon_state = poisonOverlayState)
-			poisonOverlay.color = reagents.get_color()
-			overlays += poisonOverlay
+	if(poisonOverlayState)
+		if(poisonOverlay)
+			overlays -= poisonOverlay
+		if(reagents)
+			if(reagents.total_volume)
+				poisonOverlay = image(POISON_OVERLAY_ICON, icon_state = poisonOverlayState)
+				poisonOverlay.color = reagents.get_color()
+				overlays += poisonOverlay
 
 #undef POISON_OVERLAY_ICON
