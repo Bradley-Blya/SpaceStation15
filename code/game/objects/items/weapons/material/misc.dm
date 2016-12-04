@@ -28,6 +28,7 @@
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "unathiknife"
 	attack_verb = list("ripped", "torn", "cut")
+	poisonOverlayState = "unathiknife"
 
 /obj/item/weapon/material/hatchet/tacknife
 	name = "tactical knife"
@@ -37,6 +38,7 @@
 	item_state = "knife"
 	attack_verb = list("stabbed", "chopped", "cut")
 	applies_material_colour = 1
+	poisonOverlayState = "tacknife"
 
 /obj/item/weapon/material/minihoe // -- Numbers
 	name = "mini hoe"
@@ -65,3 +67,4 @@
 	slot_flags = SLOT_BACK
 	origin_tech = "materials=2;combat=2"
 	attack_verb = list("chopped", "sliced", "cut", "reaped")
+	poisonOverlayState = "scythe"

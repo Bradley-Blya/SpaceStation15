@@ -61,6 +61,7 @@
 	origin_tech = "materials=1"
 	attack_verb = list("slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 	unbreakable = 1
+	poisonOverlayState = "knife"
 
 /obj/item/weapon/material/knife/suicide_act(mob/user)
 	viewers(user) << pick("\red <b>[user] is slitting \his wrists with the [src.name]! It looks like \he's trying to commit suicide.</b>", \
@@ -73,6 +74,7 @@
 	desc = "A sharp, metal hook what sticks into things."
 	icon_state = "hook_knife"
 	item_state = "hook_knife"
+	poisonOverlayState = "hook"
 
 /obj/item/weapon/material/knife/ritual
 	name = "ritual knife"
@@ -80,11 +82,13 @@
 	icon = 'icons/obj/wizard.dmi'
 	icon_state = "render"
 	applies_material_colour = 0
+	poisonOverlayState = "ritual"
 
 /obj/item/weapon/material/knife/butch
 	name = "butcher's cleaver"
 	icon = 'icons/obj/kitchen.dmi'
 	icon_state = "butch"
+	poisonOverlayState = "butch"
 	desc = "A huge thing used for chopping and chopping up meat. This includes clowns and clown-by-products."
 	force_divisor = 0.25 // 15 when wielded with hardness 60 (steel)
 	attack_verb = list("cleaved", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")

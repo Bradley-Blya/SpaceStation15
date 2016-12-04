@@ -10,6 +10,7 @@
 	edge = 1
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 	hitsound = 'sound/weapons/bladeslice.ogg'
+	poisonOverlayState = "claymore"
 
 /obj/item/weapon/material/sword/IsShield()
 	return 1
@@ -24,6 +25,7 @@
 	icon_state = "katana"
 	item_state = "katana"
 	slot_flags = SLOT_BELT | SLOT_BACK
+	poisonOverlayState = "katana"
 
 /obj/item/weapon/material/sword/katana/suicide_act(mob/user)
 	viewers(user) << "<span class='danger'>[user] is slitting \his stomach open with the [src.name]! It looks like \he's trying to commit seppuku.</span>"
