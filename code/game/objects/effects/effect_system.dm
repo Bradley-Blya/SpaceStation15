@@ -182,6 +182,7 @@ steam.start() -- spawns the effect
 	icon = 'icons/effects/96x96.dmi'
 	pixel_x = -32
 	pixel_y = -32
+	layer = MOB_LAYER+1
 
 /obj/effect/effect/smoke/New()
 	..()
@@ -509,10 +510,10 @@ steam.start() -- spawns the effect
 				M << "\red The solution violently explodes."
 
 			explosion(
-				location, 
-				round(min(devst, BOMBCAP_DVSTN_RADIUS)), 
-				round(min(heavy, BOMBCAP_HEAVY_RADIUS)), 
-				round(min(light, BOMBCAP_LIGHT_RADIUS)), 
+				location,
+				round(min(devst, BOMBCAP_DVSTN_RADIUS)),
+				round(min(heavy, BOMBCAP_HEAVY_RADIUS)),
+				round(min(light, BOMBCAP_LIGHT_RADIUS)),
 				round(min(flash, BOMBCAP_FLASH_RADIUS))
 				)
 
