@@ -1367,3 +1367,13 @@
 	if(istype(shoes, /obj/item/clothing/shoes/magboots) && (shoes.flags & NOSLIP))  //magboots + dense_object = no floating
 		return 1
 	return 0
+
+/mob/living/carbon/human/verb/pull_punches()
+	set name = "Pull Punches"
+	set desc = "Try not to hurt them."
+	set category = "IC"
+
+	if(stat) return
+	pulling_punches = !pulling_punches
+	to_chat(src, "<span class='notice'>You are now [pulling_punches ? "pulling your punches" : "not pulling your punches"].</span>")
+	return

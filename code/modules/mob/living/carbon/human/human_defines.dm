@@ -86,3 +86,5 @@
 	mob_bump_flag = HUMAN
 	mob_push_flags = ALLMOBS
 	mob_swap_flags = ALLMOBS
+
+	var/pulling_punches
