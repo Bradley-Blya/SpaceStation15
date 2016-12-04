@@ -53,30 +53,39 @@
 
 /atom/movable/lighting_overlay/proc/update_overlay()
 	var/turf/T = loc
-
 	if(istype(T)) //Incase we're not on a turf, pool ourselves, something happened.
 		if(lum_r == lum_g && lum_r == lum_b) //greyscale
-			blend_mode = BLEND_OVERLAY
 			if(lum_r <= 0)
-				T.luminosity = 0
+				if(blend_mode == BLEND_OVERLAY)
+					animate(src, T.luminosity = 0, time = LIGHTING_ANIMATE_TIME)
+					animate(src, alpha = 255, time = LIGHTING_ANIMATE_TIME, flags = ANIMATION_PARALLEL)
+				else
+					T.luminosity = 0
+					alpha = 255
 				color = "#000000"
-				alpha = 255
 			else
 				T.luminosity = 1
 				color = "#000000"
-				alpha = (1 - min(lum_r, 1)) * 255
+				if(blend_mode == BLEND_OVERLAY)
+					animate(src, alpha = (1 - min(lum_r, 1)) * 255, time = LIGHTING_ANIMATE_TIME)
+				else
+					alpha = (1 - min(lum_r, 1)) * 255
+			blend_mode = BLEND_OVERLAY
 		else
 			alpha = 255
 			var/mx = max(lum_r, lum_g, lum_b)
 			. = 1 // factor
 			if(mx > 1)
 				. = 1/mx
-			blend_mode = BLEND_MULTIPLY
-			color = rgb(lum_r * 255 * ., lum_g * 255 * ., lum_b * 255 * .)
+			if(blend_mode == BLEND_MULTIPLY)
+				animate(src, color = rgb(lum_r * 255 * ., lum_g * 255 * ., lum_b * 255 * .), time = LIGHTING_ANIMATE_TIME)
+			else
+				color = rgb(lum_r * 255 * ., lum_g * 255 * ., lum_b * 255 * .)
 			if(color != "#000000")
 				T.luminosity = 1
 			else  //No light, set the turf's luminosity to 0 to remove it from view()
 				T.luminosity = 0
+			blend_mode = BLEND_MULTIPLY
 	else
 		warning("A lighting overlay realised its loc was NOT a turf (actual loc: [loc][loc ? ", " + loc.type : ""]) in update_overlay() and got pooled!")
 		qdel(src)
@@ -98,5 +107,5 @@
 	var/turf/T = loc
 	if(istype(T))
 		T.lighting_overlay = null
-	
+
 	..()
