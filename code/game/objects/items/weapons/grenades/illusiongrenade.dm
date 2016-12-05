@@ -20,7 +20,7 @@
 
 
 /atom/movable/proc/stealth(var/time = 10, var/phase_in = 5, var/phase_out = 5, var/newInvisibility = INVISIBILITY_LEVEL_ONE)
-	if(invisibility >= newInvisibility)
+	if(invisibility > INVISIBILITY_LEVEL_ONE/2)
 		return
 	spawn()
 		var/alphaSaved = alpha

@@ -221,6 +221,8 @@
 	set category = "Object"
 	set src in oview(1)
 
+	if(!usr)
+		return
 	if(usr.stat == DEAD)
 		return
 	if(occupant)

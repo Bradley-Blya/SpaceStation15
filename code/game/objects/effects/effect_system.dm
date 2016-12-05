@@ -75,7 +75,7 @@ steam.start() -- spawns the effect
 			spawn(0)
 				if(holder)
 					src.location = get_turf(holder)
-				var/obj/effect/effect/steam/steam = PoolOrNew(/obj/effect/effect/steam, src.location)
+				var/obj/effect/effect/steam/steam = new /obj/effect/effect/steam(src.location)
 				var/direction
 				if(src.cardinals)
 					direction = pick(cardinal)
@@ -84,7 +84,7 @@ steam.start() -- spawns the effect
 				for(i=0, i<pick(1,2,3), i++)
 					sleep(5)
 					step(steam,direction)
-				spawn(20)
+				spawn(25)
 					qdel(steam)
 
 /////////////////////////////////////////////
@@ -107,7 +107,7 @@ steam.start() -- spawns the effect
 	var/turf/T = src.loc
 	if (istype(T, /turf))
 		T.hotspot_expose(1000,100)
-	spawn (100)
+	spawn (20)
 		qdel(src)
 	return
 
@@ -145,7 +145,7 @@ steam.start() -- spawns the effect
 			spawn(0)
 				if(holder)
 					src.location = get_turf(holder)
-				var/obj/effect/effect/sparks/sparks = PoolOrNew(/obj/effect/effect/sparks, src.location)
+				var/obj/effect/effect/sparks/sparks = new /obj/effect/effect/sparks(src.location)
 				src.total_sparks++
 				var/direction
 				if(src.cardinals)
@@ -223,6 +223,13 @@ steam.start() -- spawns the effect
 	..()
 	set_light(brightness)
 
+/obj/effect/effect/smoke/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
+	if(air_group || (height==0)) return 1
+	if(istype(mover, /obj/item/projectile/beam))
+		var/obj/item/projectile/beam/B = mover
+		B.damage = (B.damage/2)
+	return 1
+
 /////////////////////////////////////////////
 // Bad smoke
 /////////////////////////////////////////////
@@ -239,19 +246,13 @@ steam.start() -- spawns the effect
 	if (!..())
 		return 0
 	M.drop_item()
-	M.adjustOxyLoss(1)
+	M.adjustOxyLoss(10)
 	if (M.coughedtime != 1)
 		M.coughedtime = 1
 		M.emote("cough")
 		spawn ( 20 )
 			M.coughedtime = 0
 
-/obj/effect/effect/smoke/bad/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
-	if(air_group || (height==0)) return 1
-	if(istype(mover, /obj/item/projectile/beam))
-		var/obj/item/projectile/beam/B = mover
-		B.damage = (B.damage/2)
-	return 1
 /////////////////////////////////////////////
 // Sleep smoke
 /////////////////////////////////////////////
@@ -332,7 +333,7 @@ steam.start() -- spawns the effect
 		spawn(0)
 			if(holder)
 				src.location = get_turf(holder)
-			var/obj/effect/effect/smoke/smoke = PoolOrNew(smoke_type, src.location)
+			var/obj/effect/effect/smoke/smoke = new smoke_type(src.location)
 			src.total_smoke++
 			var/direction = src.direction
 			if(!direction)
@@ -390,7 +391,7 @@ steam.start() -- spawns the effect
 				var/turf/T = get_turf(src.holder)
 				if(T != src.oldposition)
 					if(istype(T, /turf/space))
-						var/obj/effect/effect/ion_trails/I = PoolOrNew(/obj/effect/effect/ion_trails, src.oldposition)
+						var/obj/effect/effect/ion_trails/I = new /obj/effect/effect/ion_trails(src.oldposition)
 						src.oldposition = T
 						I.set_dir(src.holder.dir)
 						flick("ion_fade", I)
@@ -436,7 +437,7 @@ steam.start() -- spawns the effect
 			src.processing = 0
 			spawn(0)
 				if(src.number < 3)
-					var/obj/effect/effect/steam/I = PoolOrNew(/obj/effect/effect/steam, src.oldposition)
+					var/obj/effect/effect/steam/I = new /obj/effect/effect/steam(src.oldposition)
 					src.number++
 					src.oldposition = get_turf(holder)
 					I.set_dir(src.holder.dir)
@@ -476,7 +477,7 @@ steam.start() -- spawns the effect
 
 	start()
 		if (amount <= 2)
-			var/datum/effect/effect/system/spark_spread/s = PoolOrNew(/datum/effect/effect/system/spark_spread)
+			var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 			s.set_up(2, 1, location)
 			s.start()
 
