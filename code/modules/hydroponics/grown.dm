@@ -162,7 +162,7 @@
 			M.Stun(8)
 			M.Weaken(5)
 			seed.thrown_at(src,M)
-			sleep(-1)
+			lagcheck()
 			if(src) qdel(src)
 			return
 
@@ -280,7 +280,7 @@
 				return
 			reagents.remove_any(rand(1,3))
 			seed.thrown_at(src,M)
-			sleep(-1)
+			lagcheck()
 			if(!src)
 				return
 			if(prob(35))
@@ -306,7 +306,7 @@
 	if(user.a_intent == I_HURT)
 		user.visible_message("<span class='danger'>\The [user] squashes \the [src]!</span>")
 		seed.thrown_at(src,user)
-		sleep(-1)
+		lagcheck()
 		if(src) qdel(src)
 		return
 

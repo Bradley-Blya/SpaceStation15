@@ -160,7 +160,7 @@ Deep minerals:
 
  	// Recurse until size is too small to subdivide.
 	if(isize>3)
-		sleep(-1)
+		lagcheck()
 		iteration++
 		iterate(iteration, x,       y,       hsize)
 		iterate(iteration, x+hsize, y,       hsize)
@@ -172,7 +172,7 @@ Deep minerals:
 		if((origin_x + x) > limit_x) continue
 		for(var/y = 0, y < real_size, y++)
 			if((origin_y + y) > limit_y) continue
-			sleep(-1)
+			lagcheck()
 			apply_to_turf(x,y)
 
 /datum/random_map/ore/apply_to_turf(var/x,var/y)
@@ -191,7 +191,7 @@ Deep minerals:
 			if(!T || !T.has_resources)
 				continue
 
-			sleep(-1)
+			lagcheck()
 
 			T.resources = list()
 			T.resources["silicates"] = rand(3,5)

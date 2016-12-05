@@ -118,7 +118,7 @@
 	currentWorker.kill()
 	currentWorker = null
 	// After we kill a worker, yield so that if the worker's been tying up the cpu, other stuff can immediately resume
-	sleep(-1)
+	lagcheck()
 	currentKillCount++
 	totalKillCount++
 	if (currentKillCount >= 3)

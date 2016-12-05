@@ -127,7 +127,7 @@ var/global/list/random_maps = list()
 		if((origin_x + x) > limit_x) continue
 		for(var/y = 0, y < real_size, y++)
 			if((origin_y + y) > limit_y) continue
-			sleep(-1)
+			lagcheck()
 			apply_to_turf(origin_x+x,origin_y+y)
 
 /datum/random_map/proc/apply_to_turf(var/x,var/y)
@@ -149,7 +149,7 @@ var/global/list/random_maps = list()
 
 /datum/random_map/proc/cleanup()
 
-	sleep(-1)
+	lagcheck()
 	// Create ore.
 	var/ore_count = ORE_COUNT
 	while(ore_count)
@@ -162,7 +162,7 @@ var/global/list/random_maps = list()
 			map[check_cell] = 3
 		ore_count--
 
-	sleep(-1)
+	lagcheck()
 
 	// Place random asteroid rooms.
 	var/rooms_placed = 0

@@ -187,6 +187,7 @@ datum/controller/process/proc/kill()
 		del(src) // This should del
 
 datum/controller/process/proc/scheck(var/tickId = 0)
+	lagcheck()
 	if (killed)
 		// The kill proc is the only place where killed is set.
 		// The kill proc should have deleted this datum, and all sleeping procs that are

@@ -46,22 +46,22 @@ datum/controller/game_controller/proc/setup()
 
 datum/controller/game_controller/proc/setup_objects()
 	admin_notice("<span class='danger'>Initializing objects</span>", R_DEBUG)
-	sleep(-1)
+	lagcheck()
 	for(var/atom/movable/object in world)
 		object.initialize()
 
 	admin_notice("<span class='danger>Initializing areas</span>", R_DEBUG)
-	sleep(-1)
+	lagcheck()
 	for(var/area/area in all_areas)
 		area.initialize()
 
 	admin_notice("<span class='danger'>Initializing pipe networks</span>", R_DEBUG)
-	sleep(-1)
+	lagcheck()
 	for(var/obj/machinery/atmospherics/machine in machines)
 		machine.build_network()
 
 	admin_notice("<span class='danger'>Initializing atmos machinery.</span>", R_DEBUG)
-	sleep(-1)
+	lagcheck()
 	for(var/obj/machinery/atmospherics/unary/U in machines)
 		if(istype(U, /obj/machinery/atmospherics/unary/vent_pump))
 			var/obj/machinery/atmospherics/unary/vent_pump/T = U
@@ -82,4 +82,4 @@ datum/controller/game_controller/proc/setup_objects()
 	populate_spawn_points()
 
 	admin_notice("<span class='danger'>Initializations complete.</span>", R_DEBUG)
-	sleep(-1)
+	lagcheck()

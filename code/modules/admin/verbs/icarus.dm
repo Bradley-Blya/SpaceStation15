@@ -69,7 +69,7 @@ proc/Icarus_FireLaser(var/turf/target)
 		in_chamber.kill_count = 500
 		in_chamber.process()
 		damage -= damage / i
-		sleep(-1)
+		lagcheck()
 
 	// Let everyone know what hit them.
 	var/obj/item/projectile/beam/in_chamber = new (start)

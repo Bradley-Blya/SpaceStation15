@@ -97,6 +97,7 @@
 #include "code\controllers\master_controller.dm"
 #include "code\controllers\shuttle_controller.dm"
 #include "code\controllers\subsystems.dm"
+#include "code\controllers\tick_usage.dm"
 #include "code\controllers\verbs.dm"
 #include "code\controllers\voting.dm"
 #include "code\controllers\Processes\air.dm"

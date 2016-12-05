@@ -79,7 +79,7 @@ var/list/blob_nodes = list()
 		expanding = 1
 
 		for(var/i = 1 to 2)
-			sleep(-1)
+			lagcheck()
 			if(!blobs.len)	break
 			var/obj/effect/blob/B = pick(blobs)
 			if(isNotStationLevel(B.z))

@@ -60,7 +60,7 @@
 			loc = A.loc
 			return
 
-		sleep(-1) //Might not be important enough for a sleep(-1) but the sleep/spawn itself is necessary thanks to explosions and metoerhits
+		lagcheck() //Might not be important enough for a lagcheck() but the sleep/spawn itself is necessary thanks to explosions and metoerhits
 
 		if(src)//Do not add to this if() statement, otherwise the meteor won't delete them
 			if(A)
