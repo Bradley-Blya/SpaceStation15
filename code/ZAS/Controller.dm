@@ -154,18 +154,19 @@ Total Unsimulated Turfs: [world.maxx*world.maxy*world.maxz - simulated_turf_coun
 		#ifdef ZASDBG
 		var/updated = 0
 		#endif
-		
+
 		//defer updating of self-zone-blocked turfs until after all other turfs have been updated.
 		//this hopefully ensures that non-self-zone-blocked turfs adjacent to self-zone-blocked ones
 		//have valid zones when the self-zone-blocked turfs update.
 		var/list/deferred = list()
-		
+
 		for(var/turf/T in updating)
+			lagcheck()
 			//check if the turf is self-zone-blocked
 			if(T.c_airblock(T) & ZONE_BLOCKED)
 				deferred += T
 				continue
-			
+
 			T.update_air_properties()
 			T.post_update_air_properties()
 			T.needs_air_update = 0
@@ -176,6 +177,7 @@ Total Unsimulated Turfs: [world.maxx*world.maxy*world.maxz - simulated_turf_coun
 			//sleep(1)
 
 		for(var/turf/T in deferred)
+			lagcheck()
 			T.update_air_properties()
 			T.post_update_air_properties()
 			T.needs_air_update = 0
@@ -196,6 +198,7 @@ Total Unsimulated Turfs: [world.maxx*world.maxy*world.maxz - simulated_turf_coun
 		tick_progress = "processing edges"
 
 	for(var/connection_edge/edge in active_edges)
+		lagcheck()
 		edge.tick()
 
 	//Process fire zones.
@@ -203,6 +206,7 @@ Total Unsimulated Turfs: [world.maxx*world.maxy*world.maxz - simulated_turf_coun
 		tick_progress = "processing fire zones"
 
 	for(var/zone/Z in active_fire_zones)
+		lagcheck()
 		Z.process_fire()
 
 	//Process hotspots.
@@ -210,6 +214,7 @@ Total Unsimulated Turfs: [world.maxx*world.maxy*world.maxz - simulated_turf_coun
 		tick_progress = "processing hotspots"
 
 	for(var/obj/fire/fire in active_hotspots)
+		lagcheck()
 		fire.process()
 
 	//Process zones.
@@ -221,6 +226,7 @@ Total Unsimulated Turfs: [world.maxx*world.maxy*world.maxz - simulated_turf_coun
 		updating = zones_to_update
 		zones_to_update = list()
 		for(var/zone/zone in updating)
+			lagcheck()
 			zone.tick()
 			zone.needs_update = 0
 
