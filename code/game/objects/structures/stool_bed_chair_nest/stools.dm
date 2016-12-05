@@ -6,6 +6,7 @@ var/global/list/stool_cache = list() //haha stool
 	desc = "Apply butt."
 	icon = 'icons/obj/furniture.dmi'
 	icon_state = "stool_preview" //set for the map
+	item_state = "stool_preview"
 	force = 10
 	throwforce = 10
 	w_class = 5
@@ -15,6 +16,7 @@ var/global/list/stool_cache = list() //haha stool
 
 /obj/item/weapon/stool/padded
 	icon_state = "stool_padded_preview" //set for the map
+	item_state = "stool_padded_preview"
 
 /obj/item/weapon/stool/New(var/newloc, var/new_material, var/new_padding_material)
 	..(newloc)
