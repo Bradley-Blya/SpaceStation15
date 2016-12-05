@@ -38,11 +38,13 @@ proc/explosion_rec(turf/epicenter, power)
 
 	//This steap handles the gathering of turfs which will be ex_act() -ed in the next step. It also ensures each turf gets the maximum possible amount of power dealt to it.
 	for(var/direction in cardinal)
+		lagcheck()
 		var/turf/T = get_step(epicenter, direction)
 		T.explosion_spread(power - epicenter.explosion_resistance, direction)
 
 	//This step applies the ex_act effects for the explosion, as planned in the previous step.
 	for(var/turf/T in explosion_turfs)
+		lagcheck()
 		if(explosion_turfs[T] <= 0) continue
 		if(!T) continue
 
@@ -57,6 +59,7 @@ proc/explosion_rec(turf/epicenter, power)
 		if(!T)
 			T = locate(x,y,z)
 		for(var/atom/A in T)
+			lagcheck()
 			A.ex_act(severity)
 
 	explosion_in_progress = 0
@@ -105,6 +108,7 @@ proc/explosion_rec(turf/epicenter, power)
 
 	var/spread_power = power - src.explosion_resistance //This is the amount of power that will be spread to the tile in the direction of the blast
 	for(var/obj/O in src)
+		lagcheck()
 		if(O.explosion_resistance)
 			spread_power -= O.explosion_resistance
 

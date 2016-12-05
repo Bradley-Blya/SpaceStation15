@@ -9,7 +9,6 @@ proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impa
 			var/power = devastation_range * 2 + heavy_impact_range + light_impact_range //The ranges add up, ie light 14 includes both heavy 7 and devestation 3. So this calculation means devestation counts for 4, heavy for 2 and light for 1 power, giving us a cap of 27 power.
 			explosion_rec(epicenter, power)
 			return
-
 		var/start = world.timeofday
 		epicenter = get_turf(epicenter)
 		if(!epicenter) return
@@ -36,6 +35,7 @@ proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impa
 		far_dist += devastation_range * 20
 		var/frequency = get_rand_frequency()
 		for(var/mob/M in player_list)
+			lagcheck()
 			// Double check for client
 			if(M && M.client)
 				var/turf/M_turf = get_turf(M)
@@ -55,6 +55,7 @@ proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impa
 		var/close = range(world.view+round(devastation_range,1), epicenter)
 		// to all distanced mobs play a different sound
 		for(var/mob/M in world) if(M.z == epicenter.z) if(!(M in close))
+			lagcheck()
 			// check if the mob can hear
 			if(M.ear_deaf <= 0 || !M.ear_deaf) if(!istype(M.loc,/turf/space))
 				M << 'sound/effects/explosionfar.ogg'
@@ -82,6 +83,7 @@ proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impa
 		var/z0 = epicenter.z
 
 		for(var/turf/T in trange(max_range, epicenter))
+			lagcheck()
 			var/dist = sqrt((T.x - x0)**2 + (T.y - y0)**2)
 
 			if(dist < devastation_range)		dist = 1
@@ -92,6 +94,7 @@ proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impa
 			T.ex_act(dist)
 			if(T)
 				for(var/atom_movable in T.contents)	//bypass type checking since only atom/movable can be contained by turfs anyway
+					lagcheck()
 					var/atom/movable/AM = atom_movable
 					if(AM && AM.simulated)	AM.ex_act(dist)
 
@@ -101,6 +104,7 @@ proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impa
 
 		//Machines which report explosions.
 		for(var/i,i<=doppler_arrays.len,i++)
+			lagcheck()
 			var/obj/machinery/doppler_array/Array = doppler_arrays[i]
 			if(Array)
 				Array.sense_explosion(x0,y0,z0,devastation_range,heavy_impact_range,light_impact_range,took)
@@ -118,6 +122,7 @@ proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impa
 
 proc/secondaryexplosion(turf/epicenter, range)
 	for(var/turf/tile in range(range, epicenter))
+		lagcheck()
 		tile.ex_act(2)
 
 ///// Z-Level Stuff
