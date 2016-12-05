@@ -73,6 +73,7 @@ var/global/list/narsie_list = list()
 	set background = BACKGROUND_ENABLED
 
 	for (var/turf/A in orange(consume_range, src))
+		lagcheck()
 		consume(A)
 
 /obj/singularity/narsie/mezzer()
@@ -186,6 +187,7 @@ var/global/list/narsie_list = list()
 		var/dist = get_dist(A, src)
 
 		for (var/atom/movable/AM in A.contents)
+			lagcheck()
 			if (dist <= consume_range)
 				consume(AM)
 				continue
@@ -217,6 +219,7 @@ var/global/list/narsie_list = list()
 		var/dist = get_dist(A, src)
 
 		for (var/atom/movable/AM2 in A.contents)
+			lagcheck()
 			if (AM2 == src) // This is the snowflake.
 				continue
 
@@ -264,8 +267,9 @@ var/global/list/narsie_list = list()
 					continue
 
 				spawn (0)
+					lagcheck()
 					AM2.singularity_pull(src, src.current_size)
-
+		lagcheck()
 		if (dist <= consume_range && !istype(A, /turf/space))
 			var/turf/T2 = A
 			T2.ChangeTurf(/turf/space)

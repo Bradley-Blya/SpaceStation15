@@ -273,6 +273,7 @@
 	set background = BACKGROUND_ENABLED
 
 	for(var/atom/X in orange(grav_pull, src))
+		lagcheck()
 		var/dist = get_dist(X, src)
 		var/obj/singularity/S = src
 		if(!istype(src))
